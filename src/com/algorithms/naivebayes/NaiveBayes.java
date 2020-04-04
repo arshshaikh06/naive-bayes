@@ -1,13 +1,12 @@
 package com.algorithms.naivebayes;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
 import com.algorithms.naivebayes.datasets.Data;
 
-public class test2 {
+public class NaiveBayes {
     public static void main(String[] args) {
 
         System.out.println(
@@ -75,28 +74,20 @@ public class test2 {
         String[] testTuple = testTupleStr.split(", ");
 
         long start = System.currentTimeMillis();
+
         String checkVal = data[1][columns - 1];
-
-        String val0 = values.get(0);
-        String val1 = values.get(1);
-
-        HashMap<String, Integer> calc = new HashMap<>();
-        calc.put(val0, 0);
-        calc.put(val1, 0);
-
-        HashMap<String, Double> finalProb = new HashMap<>();
-        finalProb.put(val0, 0.0);
-        finalProb.put(val1, 0.0);
+        int[] calc = new int[2];
+        double[] finalProb = new double[2];
 
         for (int i = 1; i <= rows; i++) {
             if (data[i][columns - 1].equals(checkVal))
-                calc.merge(values.get(0), 1, (a, b) -> a + b);
+                calc[0]++;
             else
-                calc.merge(values.get(1), 1, (a, b) -> a + b);
+                calc[1]++;
         }
 
-        finalProb.put(val0, calc.get(val0) * 1.0 / rows);
-        finalProb.put(val1, calc.get(val1) * 1.0 / rows);
+        finalProb[0] = calc[0] * 1.0 / rows;
+        finalProb[1] = calc[1] * 1.0 / rows;
 
         int feature0Count = 0;
         int feature1Count = 0;
@@ -115,18 +106,18 @@ public class test2 {
                 }
             }
 
-            finalProb.put(val0, (feature0Count * 1.0 / calc.get(val0)) * finalProb.get(val0));
-            finalProb.put(val1, (feature1Count * 1.0 / calc.get(val1)) * finalProb.get(val1));
+            finalProb[0] = (feature0Count * 1.0 / calc[0]) * finalProb[0];
+            finalProb[1] = (feature1Count * 1.0 / calc[1]) * finalProb[1];
 
         }
 
-        if (finalProb.get(val0) > finalProb.get(val1))
-            System.out.println(val0);
+        if (finalProb[0] > finalProb[1])
+            System.out.println(values.get(0));
         else
-            System.out.println(val1);
+            System.out.println(values.get(1));
 
         long end = System.currentTimeMillis();
 
-        System.out.println(end - start);
+        System.out.println("Runtime: " + (end - start) + "ms");
     }
 }
