@@ -1,4 +1,4 @@
-# Naive-Bayes using Java
+# Naive-Bayes Classification using Java
 
 ## About
 
