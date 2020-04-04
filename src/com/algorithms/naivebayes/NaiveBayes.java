@@ -18,6 +18,8 @@ public class NaiveBayes {
 
         Scanner sc = new Scanner(System.in);
 
+        // Choose a data set
+
         do {
             int choice = sc.nextInt();
             check = false;
@@ -38,8 +40,12 @@ public class NaiveBayes {
 
         } while (check);
 
+        // Calculating number of rows and columns
+
         int rows = data.length - 1;
         int columns = data[0].length;
+
+        // Logging the data set
 
         for (int i = 0; i <= rows; i++) {
             for (int j = 0; j < columns; j++) {
@@ -47,6 +53,8 @@ public class NaiveBayes {
             }
             System.out.println();
         }
+
+        // Find the result attributes values
 
         List<String> values = new ArrayList<>();
 
@@ -79,6 +87,8 @@ public class NaiveBayes {
         int[] calc = new int[2];
         double[] finalProb = new double[2];
 
+        // Actual calculation starts here
+
         for (int i = 1; i <= rows; i++) {
             if (data[i][columns - 1].equals(checkVal))
                 calc[0]++;
@@ -91,11 +101,18 @@ public class NaiveBayes {
 
         int feature0Count = 0;
         int feature1Count = 0;
+
+        // * When using TAN Data Set
+        // int SKIP = 1;
+
         for (int t = 0; t < testTuple.length; t++) {
             feature0Count = 0;
             feature1Count = 0;
 
             for (int i = 1; i <= rows; i++) {
+
+                // * When using TAN Data Set
+                // if (testTuple[t].equals(data[i][t + SKIP]))
 
                 if (testTuple[t].equals(data[i][t])) {
 

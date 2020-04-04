@@ -42,13 +42,4 @@ public class Data {
                         { "31...40", "medium", "no", "excellent", "yes" }, { "31...40", "high", "yes", "fair", "yes" },
                         { ">40", "medium", "no", "excellent", "no" }, };
 
-        static Map<String, String[][]> datas = Collections.unmodifiableMap(new HashMap<String, String[][]>() {
-                private static final long serialVersionUID = 1L;
-                {
-                        put("WEATHER", WEATHER);
-                        put("TAN", TAN);
-                        put("CAR", CAR);
-                        put("INCOME", INCOME);
-                }
-        });
 }
